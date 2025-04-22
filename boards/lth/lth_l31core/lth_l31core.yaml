@@ -1,0 +1,11 @@
+identifier: lth_platform-l31core
+name: L31 softcore CPU
+type: mcu
+arch: riscv32
+toolchain:
+  - zephyr
+testing:
+  ignore_tags:
+    - net
+    - bluetooth
+supported:

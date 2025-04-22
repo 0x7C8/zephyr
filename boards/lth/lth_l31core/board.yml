@@ -1,0 +1,6 @@
+board:
+  name: lth_l31core
+  full_name: LTH L31Core
+  vendor: LTH
+  socs:
+  - name: codasip_l31

@@ -1,0 +1,9 @@
+# Copyright (c) 2025 LTH
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_LTH_PLATFORM_L31CORE
+
+config BOARD
+	default "lth_platform_l31core"
+
+endif # BOARD_LTH_PLATFORM_L31CORE

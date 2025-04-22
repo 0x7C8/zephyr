@@ -1,0 +1,10 @@
+# Copyright (c) 2025 LTH
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_CODASIP_L31
+    bool "Codasip L31 SoC"
+    help
+        Codasip L31 implementation
+
+config SOC
+    default "codasip_l31" if SOC_CODASIP_L31
