@@ -1,4 +1,4 @@
-identifier: lth_platform-l31core
+identifier: l31core
 name: L31 softcore CPU
 type: mcu
 arch: riscv32

@@ -7,13 +7,12 @@
 /dts-v1/;
 
 #include <lth/l31core.dtsi>
-#include <lth/lth_platform.dtsi>
 
 / {
-    compatible = "codasip,lth_platform-codasip_l31";
+    compatible = "codasip,l31core";
 
-    // Needed?
     chosen {
         zephyr,sram = &sram0;
+        zephyr,timer = &clint;
     };
 };
