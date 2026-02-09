@@ -1,0 +1,5 @@
+# Copyright (c) 2026 Georgij Michaliutin
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_NEXYS4
+	select SOC_L31A

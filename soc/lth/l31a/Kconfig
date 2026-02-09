@@ -1,0 +1,12 @@
+# Copyright (c) 2026 Georgij Michaliutin
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_L31A
+
+config SOC
+	default "l31a"
+
+config SOC_FAMILY
+	default "lth"
+
+endif

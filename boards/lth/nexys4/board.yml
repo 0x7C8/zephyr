@@ -1,0 +1,6 @@
+board:
+  name: nexys4
+  full_name: Nexys4 FPGA Board
+  vendor: lth
+  socs:
+    - name: l31a

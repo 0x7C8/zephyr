@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) 2026 by Georgij Michaliutin
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+
+#include <lth/l31a.dtsi>
+
+/ {
+    model = "LTH Nexys4 FPGA board";
+    compatible = "lth,l31a";
+
+};

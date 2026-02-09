@@ -1,0 +1,4 @@
+family:
+  - name: lth
+    socs:
+      - name: l31a

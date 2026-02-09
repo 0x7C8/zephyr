@@ -1,0 +1,11 @@
+# Copyright (c) 2026 Georgij Michaliutin
+# SPDX-License-Identifier: Apache-2.0
+
+CONFIG_XIP=n
+
+# Serial Drivers
+# CONFIG_SERIAL=y
+
+# Console
+# CONFIG_CONSOLE=y
+# CONFIG_UART_CONSOLE=y

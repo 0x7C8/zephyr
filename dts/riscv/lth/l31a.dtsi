@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) 2026 by Georgij Michaliutin
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+
+#include <skeleton.dtsi>
+#include <freq.h>
+#include <mem.h>
+
+/ {
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+    /* Is this needed? */
+	chosen {
+		zephyr,sram = &sram0;
+	};
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu0: cpu@0 {
+			device_type = "cpu";
+			compatible = "riscv";
+			reg = <0>;
+            status = "okay";
+
+            /* This clock is dependent on HDL Clock divider */ 
+			clock-frequency = <25000000>;
+
+			cpu0_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				interrupt-controller;
+				compatible = "riscv,cpu-intc";
+			};
+		};
+	};
+
+	/*
+	 * BRAM (8192 x 32bit) = 32 KiB = 0x8000.
+	 */
+	sram0: memory@80000000 {
+		device_type = "memory";
+		reg = <0x80000000 DT_SIZE_K(32)>;
+	};
+
+	soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+        compatible = "simple-bus";
+		ranges;
+
+		/*
+		 * CLINT: machine software interrupt (MSIP) and machine timer (MTIP).
+		 * Typical CLINT base is 0x0200_0000 with size 0x0001_0000.
+		 */
+		clint0: clint@2000000 {
+			compatible = "riscv,clint0";
+			reg = <0x02000000 0x10000>;
+			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>;
+		};
+
+        mtimer: timer@200bff8 {
+          compatible = "riscv,machine-timer";
+          reg = <0x0200bff8 0x8>,
+                <0x02004000 0x8>;
+          reg-names = "mtime", "mtimecmp";
+          interrupts-extended = <&cpu0_intc 7>;
+        };
+	};
+};
