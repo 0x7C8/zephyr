@@ -1,11 +1,22 @@
 # Copyright (c) 2026 Georgij Michaliutin
 # SPDX-License-Identifier: Apache-2.0
 
-CONFIG_XIP=n
 
-# Serial Drivers
-# CONFIG_SERIAL=y
+# No UART, disable console output
+CONFIG_SERIAL=n
+CONFIG_CONSOLE=n
+CONFIG_PRINTK=n
+CONFIG_BOOT_BANNER=n
 
-# Console
-# CONFIG_CONSOLE=y
-# CONFIG_UART_CONSOLE=y
+# Minimal footprint
+CONFIG_MINIMAL_LIBC=y
+CONFIG_SIZE_OPTIMIZATIONS=y
+#CONFIG_MAIN_STACK_SIZE=1024
+#CONFIG_ISR_STACK_SIZE=512
+#CONFIG_IDLE_STACK_SIZE=256
+
+# Output format
+CONFIG_BUILD_OUTPUT_BIN=y
+
+# GPIO (TODO)
+# CONFIG_GPIO=y

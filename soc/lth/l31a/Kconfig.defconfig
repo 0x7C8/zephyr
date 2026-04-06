@@ -9,22 +9,10 @@ config SYS_CLOCK_HW_CYCLES_PER_SEC
 config NUM_IRQS
 	default 32
 
-config RISCV_MACHINE_TIMER
-	default y
-
 config RISCV_HAS_PLIC
 	default n
 
 config XIP
-	default n
-
-config USERSPACE
-	default n
-
-config SMP
-	default n
-
-config FPU
 	default n
 
 endif # SOC_L31A

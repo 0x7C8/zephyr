@@ -13,5 +13,11 @@ config SOC_L31A
 	select RISCV_ISA_EXT_ZICSR
 	select RISCV_ISA_EXT_ZIFENCEI
 
+	select ATOMIC_OPERATIONS_C
+	select RISCV_MACHINE_TIMER
+
+
 	help
-	  LTH L31A: RV32 SoC for Nexys4 (RAM + CLINT only).
+	  LTH Codasip L31A: RV32IMC SoC on Nexys4 (Artix-7).
+	  Peripherals: BRAM (64 KB), CLINT, GPIO (16-bit output).
+	  No PLIC, no MMU, no FPU. Machine mode only.

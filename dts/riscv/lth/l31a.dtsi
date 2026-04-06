@@ -14,7 +14,6 @@
 	#address-cells = <1>;
 	#size-cells = <1>;
 
-    /* Is this needed? */
 	chosen {
 		zephyr,sram = &sram0;
 	};
@@ -33,19 +32,23 @@
 			clock-frequency = <25000000>;
 
 			cpu0_intc: interrupt-controller {
+				compatible = "riscv,cpu-intc";
 				#interrupt-cells = <1>;
 				interrupt-controller;
-				compatible = "riscv,cpu-intc";
 			};
 		};
 	};
 
 	/*
-	 * BRAM (8192 x 32bit) = 32 KiB = 0x8000.
+	 * BRAM: 16384 x 32-bit = 64 KB (0x0000_0000 – 0x0000_FFFF).
+	 * Currently Zephyr uses lower 32 KB (0x0000 – 0x7FFF).
+	 * Zephyr starts at 0x1100, after debug and NMI reserved regions.
+	 * Usable: 0x8000 - 0x1100 = 0x6F00 (28,416 bytes).
 	 */
-	sram0: memory@80000000 {
+	sram0: memory@1100 {
 		device_type = "memory";
-		reg = <0x80000000 DT_SIZE_K(32)>;
+		compatible = "mmio-sram";
+		reg = <0x00001100 0x6F00>;
 	};
 
 	soc {
@@ -56,14 +59,13 @@
 
 		/*
 		 * CLINT: machine software interrupt (MSIP) and machine timer (MTIP).
-		 * Typical CLINT base is 0x0200_0000 with size 0x0001_0000.
 		 */
 		clint0: clint@2000000 {
-			compatible = "riscv,clint0";
+			compatible = "sifive,clint0";
 			reg = <0x02000000 0x10000>;
 			interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>;
 		};
-
+		
         mtimer: timer@200bff8 {
           compatible = "riscv,machine-timer";
           reg = <0x0200bff8 0x8>,
@@ -71,5 +73,17 @@
           reg-names = "mtime", "mtimecmp";
           interrupts-extended = <&cpu0_intc 7>;
         };
+
+		/* TODO: GPIO, check with driver, no interrupt on LEDs
+
+		gpio0: gpio@3000000 {
+			compatible = "codasip,ahb-gpio";
+			reg = <0x03000000 0x4>;
+			gpio-controller;
+			#gpio-cells = <2>;
+			ngpios = <16>;
+			status = "okay";
+		};
+		*/
 	};
 };
